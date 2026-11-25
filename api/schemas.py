@@ -27,11 +27,17 @@ class SensorInput(BaseModel):
 # -------------------------
 
 class PredictionOutput(BaseModel):
+# -------------------------
+# 2. AI PREDICTION OUTPUT
+# -------------------------
+
+class PredictionOutput(BaseModel):
 
     status: Literal[
         "NORMAL",
         "PREDICTED_ANOMALY",
-        "ABNORMAL"
+        "ABNORMAL",
+        "UNKNOWN"
     ]
 
     anomaly_score: Optional[float] = None
@@ -42,7 +48,9 @@ class PredictionOutput(BaseModel):
 
     multivariate_anomaly_detected: bool = False
 
-    recommendation: str
+    exceeded_parameters: list[str] = Field(default_factory=list)
+
+    recommendation: str = ""
 
 
 # -------------------------
